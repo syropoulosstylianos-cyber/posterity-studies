@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Posterity Studies</title>
+<meta name="description" content="A proposal for a new field of study concerned with how we make good decisions on behalf of all future people." />
+
+<style>
+  :root {
+    color-scheme: light dark;
+
+    --ground:      #f1f3ef;
+    --surface:     #f8faf6;
+    --surface-2:   #ffffff;
+    --ink:         #182420;
+    --ink-soft:    #45524d;
+    --ink-mute:    #6f7b74;
+    --accent:      #2e6a58;
+    --accent-deep: #244f42;
+    --accent-tint: #e4ede9;
+    --brass:       #8a6626;
+    --hair:        #dbe0d8;
+    --hair-strong: #c5ccc2;
+
+    --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", Georgia, serif;
+    --font-body:    "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", Georgia, serif;
+    --font-ui:      system-ui, "Segoe UI", -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+    --measure: 34rem;
+    --wide: 63rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #0e1714;
+      --surface:     #13201c;
+      --surface-2:   #182722;
+      --ink:         #e9ebe3;
+      --ink-soft:    #b2bcb4;
+      --ink-mute:    #808b84;
+      --accent:      #71baa0;
+      --accent-deep: #8fcdb6;
+      --accent-tint: #1a302a;
+      --brass:       #caa05c;
+      --hair:        #253430;
+      --hair-strong: #34453e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:      #0e1714;
+    --surface:     #13201c;
+    --surface-2:   #182722;
+    --ink:         #e9ebe3;
+    --ink-soft:    #b2bcb4;
+    --ink-mute:    #808b84;
+    --accent:      #71baa0;
+    --accent-deep: #8fcdb6;
+    --accent-tint: #1a302a;
+    --brass:       #caa05c;
+    --hair:        #253430;
+    --hair-strong: #34453e;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap { width: min(100% - 2.6rem, var(--measure)); margin-inline: auto; }
+  .wrap-wide { width: min(100% - 2rem, var(--wide)); margin-inline: auto; }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--hair);
+    padding: clamp(3.4rem, 8vw, 6rem) 0 clamp(2.6rem, 5vw, 3.6rem);
+  }
+  .rings {
+    position: absolute;
+    top: -6rem; right: -7rem;
+    width: 30rem; height: 30rem;
+    color: var(--accent);
+    opacity: .13;
+    pointer-events: none;
+  }
+  @media (max-width: 640px) { .rings { opacity: .08; width: 22rem; height: 22rem; top: -3rem; right: -6rem; } }
+
+  .eyebrow {
+    font-family: var(--font-ui);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1.4rem;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6.5vw, 3.9rem);
+    line-height: 1.04;
+    letter-spacing: -.012em;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+  .standfirst {
+    font-size: clamp(1.15rem, 2.3vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 1.5rem 0 0;
+    max-width: 32rem;
+    text-wrap: pretty;
+  }
+  .meta {
+    font-family: var(--font-ui);
+    font-size: .78rem;
+    letter-spacing: .04em;
+    color: var(--ink-mute);
+    margin: 2.1rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem .9rem;
+  }
+  .meta span { white-space: nowrap; }
+  .meta .dot { color: var(--hair-strong); }
+
+  .thesis {
+    margin: 2.6rem 0 0;
+    padding-left: 1.3rem;
+    border-left: 3px solid var(--brass);
+  }
+  .thesis p {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 3vw, 1.72rem);
+    line-height: 1.34;
+    color: var(--ink);
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  /* ---------- Sections ---------- */
+  .sec { padding: clamp(2.8rem, 6vw, 4.4rem) 0; border-bottom: 1px solid var(--hair); }
+  .sec:last-of-type { border-bottom: 0; }
+
+  .sec-head { display: flex; align-items: baseline; gap: .9rem; margin: 0 0 1.6rem; }
+  .numeral {
+    font-family: var(--font-ui);
+    font-size: .74rem;
+    font-weight: 600;
+    letter-spacing: .16em;
+    color: var(--accent);
+    padding-top: .45rem;
+    flex: none;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3.6vw, 2.1rem);
+    line-height: 1.12;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .prose p { margin: 0 0 1.15rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose .lead { font-size: 1.16rem; color: var(--ink); }
+  .prose em { font-style: italic; }
+  .prose strong { font-weight: 600; color: var(--ink); }
+  .accentword { color: var(--accent-deep); font-style: normal; }
+
+  /* ---------- "Not X" distinction list ---------- */
+  .distinct { list-style: none; margin: 1.9rem 0 0; padding: 0; display: grid; gap: 0; }
+  .distinct li {
+    display: grid;
+    grid-template-columns: 10.5rem 1fr;
+    gap: 0 1.4rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--hair);
+    align-items: baseline;
+  }
+  .distinct li:last-child { border-bottom: 1px solid var(--hair); }
+  .distinct .not {
+    font-family: var(--font-ui);
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: var(--ink);
+    text-transform: none;
+  }
+  .distinct .not b { color: var(--accent-deep); font-weight: 600; }
+  .distinct .why { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.5; }
+  @media (max-width: 560px) {
+    .distinct li { grid-template-columns: 1fr; gap: .3rem; }
+  }
+
+  /* ---------- Matrix table ---------- */
+  .matrix-intro { margin-bottom: 1.8rem; }
+  .table-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--hair);
+    border-radius: 10px;
+    background: var(--surface);
+    -webkit-overflow-scrolling: touch;
+  }
+  table.matrix {
+    width: 100%;
+    min-width: 62rem;
+    border-collapse: collapse;
+    font-family: var(--font-ui);
+    font-size: .82rem;
+    line-height: 1.4;
+  }
+  .matrix thead th {
+    position: sticky; top: 0;
+    background: var(--surface-2);
+    text-align: left;
+    font-weight: 600;
+    font-size: .68rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding: .85rem 1rem;
+    border-bottom: 1px solid var(--hair-strong);
+    white-space: nowrap;
+  }
+  .matrix tbody td {
+    padding: .8rem 1rem;
+    border-bottom: 1px solid var(--hair);
+    vertical-align: top;
+    color: var(--ink-soft);
+  }
+  .matrix tbody tr:last-child td { border-bottom: 0; }
+  .matrix .discipline { color: var(--ink); font-weight: 600; min-width: 11rem; }
+  .matrix .goal { min-width: 12rem; }
+  .matrix .terms { color: var(--ink-mute); min-width: 15rem; font-size: .78rem; }
+  .matrix .scope { color: var(--accent-deep); white-space: nowrap; }
+
+  .tier td {
+    background: var(--accent-tint);
+    color: var(--accent-deep) !important;
+    font-weight: 600;
+    font-size: .66rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    padding: .55rem 1rem !important;
+    border-bottom: 1px solid var(--hair) !important;
+  }
+  .tier td span { color: var(--ink-mute); font-weight: 400; letter-spacing: .04em; text-transform: none; }
+
+  .caption {
+    font-family: var(--font-ui);
+    font-size: .78rem;
+    color: var(--ink-mute);
+    margin: .9rem 0 0;
+    line-height: 1.5;
+  }
+
+  /* ---------- Forthcoming ---------- */
+  .offers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: .95rem; max-width: 50rem; margin-inline: auto; }
+  @media (max-width: 620px) { .offers { grid-template-columns: 1fr; } }
+  .offer { background: var(--surface); border: 1px solid var(--hair); border-radius: 11px; padding: 1.15rem 1.2rem 1.25rem; }
+  .offer-kick { font-family: var(--font-ui); font-size: .62rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: var(--accent); margin: 0 0 .5rem; }
+  .offer-h { font-family: var(--font-display); font-size: 1.12rem; font-weight: 600; line-height: 1.18; color: var(--ink); margin: 0 0 .45rem; text-wrap: balance; }
+  .offer-d { font-family: var(--font-body); font-size: .95rem; line-height: 1.5; color: var(--ink-soft); margin: 0; }
+
+  footer.doc-foot {
+    padding: 2.4rem 0 3.4rem;
+    font-family: var(--font-ui);
+    font-size: .78rem;
+    color: var(--ink-mute);
+    line-height: 1.6;
+  }
+
+  a { color: var(--accent-deep); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fade { opacity: 0; transform: translateY(10px); animation: rise .7s cubic-bezier(.2,.7,.2,1) forwards; }
+    .fade.d1 { animation-delay: .06s; }
+    .fade.d2 { animation-delay: .12s; }
+    .fade.d3 { animation-delay: .18s; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+  }
+
+  /* ---- Interactive discipline wheel ---- */
+  :root { --t1:#c9962b; --t2:#cb4b2e; --t3:#b0468a; --t4:#3e6fb0; --t5:#1f9187; --t6:#7a5cc0; --t7:#5aa234; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --t1:#e2b448; --t2:#e96a4c; --t3:#d072ae; --t4:#5e92d6; --t5:#3cb6aa; --t6:#a385e4; --t7:#79c558; }
+  }
+  :root[data-theme="dark"] { --t1:#e2b448; --t2:#e96a4c; --t3:#d072ae; --t4:#5e92d6; --t5:#3cb6aa; --t6:#a385e4; --t7:#79c558; }
+
+  .explore-head { font-family: var(--font-ui); font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 1.7rem; }
+  .explore-grid { display: grid; grid-template-columns: 18.5rem 1fr; gap: 2.2rem; align-items: start; }
+  .explore-side { display: flex; flex-direction: column; gap: 1.3rem; }
+  @media (max-width: 880px) {
+    .explore-grid { display: flex; flex-direction: column; }
+    .wheel-col { order: 1; }
+    .explore-side { order: 2; }
+  }
+
+  .cat-list-title { font-family: var(--font-ui); font-size: .64rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 .6rem; }
+  .cat { display: flex; align-items: center; gap: .7rem; padding: .5rem .6rem; border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: background .18s, border-color .18s; font-family: var(--font-ui); font-size: .9rem; color: var(--ink-soft); }
+  .cat:hover, .cat.active, .cat:focus-visible { background: var(--surface); border-color: var(--hair); color: var(--ink); outline: none; }
+  .cat .dotc { width: .95rem; height: .95rem; border-radius: 4px; flex: none; background: var(--ink-mute); }
+  .cat .catname { line-height: 1.2; }
+
+  .wheel-stage { position: relative; width: 100%; max-width: 42rem; margin-inline: auto; }
+  .wheel-svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .seg { cursor: pointer; transition: opacity .2s; }
+  .seg-path { transition: filter .2s; stroke: var(--ground); stroke-width: 1.4; }
+  .seg.dim { opacity: .12; }
+  .seg.dim:hover { opacity: 1; }
+  .seg.active .seg-path, .seg:hover .seg-path { filter: brightness(1.12) saturate(1.06); }
+  .seg-label { font-family: var(--font-ui); font-size: 19px; fill: var(--ink-soft); transition: fill .2s; }
+  .seg.active .seg-label, .seg:hover .seg-label { fill: var(--ink); font-weight: 600; }
+  .seg:focus-visible { outline: none; }
+  .seg:focus-visible .seg-path { stroke: var(--ink); stroke-width: 2.6; }
+  .hub { cursor: pointer; }
+  .hub-ring { fill: var(--surface); stroke: var(--hair); stroke-width: 1; transition: stroke .2s, stroke-width .2s; }
+  .hub:hover .hub-ring, .hub:focus-visible .hub-ring { stroke: var(--accent); stroke-width: 2; }
+  .hub:focus-visible { outline: none; }
+  .hub-title { font-family: var(--font-display); fill: var(--ink); font-weight: 600; }
+  .hub-sub { font-family: var(--font-ui); fill: var(--ink-mute); letter-spacing: .05em; text-transform: uppercase; }
+  .detail-card { background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; padding: 1.3rem 1.35rem 1.4rem; }
+  .detail-tier { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-ui); font-size: .64rem; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 .7rem; }
+  .detail-tier .swatch { width: .72rem; height: .72rem; border-radius: 3px; background: var(--ink-mute); flex: none; }
+  .detail-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; line-height: 1.15; color: var(--ink); margin: 0 0 .65rem; text-wrap: balance; }
+  .detail-text { font-family: var(--font-body); font-size: .96rem; line-height: 1.5; color: var(--ink-soft); margin: 0; }
+  .detail-card.is-empty .detail-name { color: var(--ink-mute); }
+  @media (prefers-reduced-motion: no-preference) {
+    .detail-inner { animation: fadeSwap .28s ease; }
+    @keyframes fadeSwap { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <svg class="rings" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+    <circle cx="100" cy="100" r="26" stroke="currentColor" stroke-width="1"/>
+    <circle cx="100" cy="100" r="42" stroke="currentColor" stroke-width="1"/>
+    <circle cx="100" cy="100" r="58" stroke="currentColor" stroke-width="1"/>
+    <circle cx="100" cy="100" r="74" stroke="currentColor" stroke-width="1"/>
+    <circle cx="100" cy="100" r="90" stroke="currentColor" stroke-width="1"/>
+    <circle cx="100" cy="100" r="8" stroke="currentColor" stroke-width="1.4"/>
+  </svg>
+  <div class="wrap">
+    <p class="eyebrow fade">Proposal for a new field of study</p>
+    <h1 class="fade d1">Posterity<br/>Studies</h1>
+    <p class="standfirst fade d2">The study of how to make good decisions on behalf of those who come after us: all future people, not yet born, who will inherit the consequences of what we choose today.</p>
+    <blockquote class="thesis fade d3">
+      <p>How should the present act well toward a future that cannot vote, cannot consent, and cannot hold us to account — and how do we build the institutions, incentives, and cultures that reliably make it so?</p>
+    </blockquote>
+  </div>
+</header>
+
+<main>
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="numeral">I</span>
+        <h2>The problem of the absent future</h2>
+      </div>
+      <div class="prose">
+        <p class="lead">Every mechanism a society trusts to produce good decisions works by giving the affected party a seat at the table.</p>
+        <p>Markets give them a price to pay. Elections give them a vote to cast. Contracts give them a signature to withhold, courts a suit to file, reputation a judgment to render. Each of these is a way for the people who will bear a decision's consequences to press back on the people making it. Future generations have none of them. They do not exist yet; they cannot bargain, cannot consent, cannot reciprocate, and cannot punish.</p>
+        <p>And yet almost everything that will matter most to them is being decided now — the composition of the atmosphere, the depth of the aquifer, the level of the debt, the safety of the technologies we deploy, the durability of the institutions they will be born into. This is the defining condition of intergenerational decision-making: <strong>we hold enormous power over people who hold no power over us.</strong> The ordinary machinery of accountability is silent in precisely the cases where the stakes run longest.</p>
+        <p><span class="accentword">Posterity</span> is the name for everyone on the far side of that asymmetry: all the people who will come after us, not only our own children and grandchildren, and not only those who will live in the next few decades. This field takes the whole of posterity as its horizon. It sets aside the language of stewardship, which casts the present as the custodian of a holding and whose care, in practice, tends to stop at one's own heirs and the near term. Deciding well for posterity means extending standing to people we will never meet, whoever and wherever they turn out to be.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="numeral">II</span>
+        <h2>Why this needs a field of its own</h2>
+      </div>
+      <div class="prose">
+        <p>The obligation to the future is not a new idea. It is one of the oldest — and that is exactly the difficulty. It is old, it is everywhere, and it is scattered. Philosophers ask what we owe. Economists ask how to price it. Lawyers ask how to bind it. Psychologists ask why we ignore it. Ecologists measure what we are spending. Indigenous nations have governed by it for centuries. Each of these traditions has produced deep and rigorous knowledge about one face of the same problem — and each, working alone, sees only that face.</p>
+        <p>The wager of this proposal is that these contributions are <strong>additive, not redundant</strong>. Roughly twenty disciplines each hold a genuine, non-substitutable piece of the answer: the mechanism, the measurement, the instrument, the motive, the precedent, the limit. Assembled, they describe something none of them describes alone — not merely <em>what we owe</em> the future or <em>how much</em> it is worth, but the practical, designable question underneath both: <strong>given everything we know, how do we actually decide, and how do we build a society that decides well across generations?</strong> That question is normative, predictive, institutional, behavioral, and cultural at once. It has no academic home. This is the field proposed to house it.</p>
+        <p>It helps to be precise about what posterity studies is <em>not</em>, since it borrows from each of these and reduces to none:</p>
+        <ul class="distinct">
+          <li>
+            <span class="not">Not <b>intergenerational ethics</b></span>
+            <span class="why">— which asks what we owe the future, but stops at principle and rarely reaches the decision.</span>
+          </li>
+          <li>
+            <span class="not">Not <b>longtermism</b></span>
+            <span class="why">— which asserts that the far future matters enormously, but is a contested claim about value rather than a discipline of decision.</span>
+          </li>
+          <li>
+            <span class="not">Not <b>sustainability</b></span>
+            <span class="why">— which is largely bounded to the environmental and, in practice, often to the present; posterity studies extends the same care to institutions, knowledge, and culture.</span>
+          </li>
+          <li>
+            <span class="not">Not <b>futures studies</b></span>
+            <span class="why">— which forecasts and imagines, but neither prescribes how to choose nor holds anyone to account for the choice.</span>
+          </li>
+        </ul>
+        <p style="margin-top:1.5rem">It draws on all of them and belongs to none. Its object is the decision itself, and the systems that produce it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="numeral">III</span>
+        <h2>The disciplinary architecture</h2>
+      </div>
+      <div class="prose matrix-intro">
+        <p>No honest diagram of this field is a set of boxes, because its disciplines do not partition — they overlap. Psychology touches motivation and institutions and transmission at once; the problem of discounting the future recurs, in different clothes, in psychology, economics, and philosophy alike. What follows is therefore not a taxonomy but a <strong>matrix of contributions</strong>: for each discipline, the scale at which it works, the methods it brings, the practical lever it offers, the goal it pursues, and the concepts it lends to a shared vocabulary.</p>
+        <p>Read down the first column and the field's shape appears. The disciplines arrange themselves along a single <span class="accentword">ladder of scale — from the body to the biosphere</span>. That ladder, not a set of silos, is the anatomy of a decision made on behalf of posterity: who is deciding, on whose behalf, through what, and within what limits.</p>
+      </div>
+    </div>
+
+    <div class="wrap-wide">
+      <p class="explore-head">Explore the field — hover a category, a discipline, or the center</p>
+      <div class="explore-grid">
+        <div class="explore-side">
+          <div class="cat-list" id="cat-list">
+            <p class="cat-list-title">Categories — hover to highlight</p>
+          </div>
+          <aside class="detail-card is-empty" id="detail-card" aria-live="polite">
+            <div class="detail-inner">
+              <p class="detail-tier"><span class="swatch"></span> Twenty-one contributions</p>
+              <h3 class="detail-name">A web, not a hierarchy</h3>
+              <p class="detail-text">Hover the center for the field's own definition, a colored category to light up its disciplines, or any discipline on the ring to read what it uniquely offers.</p>
+            </div>
+          </aside>
+        </div>
+        <div class="wheel-col">
+          <div class="wheel-stage" id="wheel-mount"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap-wide" style="margin-top: clamp(2.6rem, 5vw, 3.8rem)">
+      <p class="explore-head">The disciplinary matrix — in full</p>
+      <div class="table-scroll">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th>Discipline</th>
+              <th>Scope</th>
+              <th>Methods</th>
+              <th>Intervention point</th>
+              <th>Goal</th>
+              <th>Key terms</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="tier"><td colspan="6">Normative frame <span>— sits above the ladder, framing every rung</span></td></tr>
+            <tr>
+              <td class="discipline">Philosophy</td>
+              <td class="scope">All scales</td>
+              <td>Theoretical</td>
+              <td>Supply the justification and moral standard</td>
+              <td class="goal">A defensible obligation to the future</td>
+              <td class="terms">Non-identity problem; intergenerational justice; just savings; population ethics; longtermism</td>
+            </tr>
+
+            <tr class="tier"><td colspan="6">Body &amp; biology</td></tr>
+            <tr>
+              <td class="discipline">Evolutionary Biology / Behavioral Ecology</td>
+              <td class="scope">Body &amp; species</td>
+              <td>Empirical + theoretical</td>
+              <td>Work with — and against — evolved kin bias</td>
+              <td class="goal">Understand the limits of natural care</td>
+              <td class="terms">Kin selection; inclusive fitness; parental investment; life-history theory</td>
+            </tr>
+            <tr>
+              <td class="discipline">Public Health / Epidemiology</td>
+              <td class="scope">Body → population</td>
+              <td>Empirical (statistical)</td>
+              <td>Prevention; break harmful inheritance</td>
+              <td class="goal">Healthier descendants</td>
+              <td class="terms">DOHaD; epigenetic inheritance; long-latency exposure; precaution</td>
+            </tr>
+
+            <tr class="tier"><td colspan="6">Person</td></tr>
+            <tr>
+              <td class="discipline">Psychology</td>
+              <td class="scope">Person</td>
+              <td>Empirical (experimental)</td>
+              <td>Reframe choices; strengthen future-self continuity</td>
+              <td class="goal">Motivate individuals to act for the future</td>
+              <td class="terms">Future-self continuity; temporal discounting; psychological distance; generativity; intergenerational concern; impartial beneficence</td>
+            </tr>
+            <tr>
+              <td class="discipline">Education</td>
+              <td class="scope">Person (via institutions)</td>
+              <td>Empirical (applied)</td>
+              <td>Cultivate long-term thinking in citizens</td>
+              <td class="goal">Future-capable generations</td>
+              <td class="terms">Intergenerational knowledge transfer; futures literacy; values formation; long-term thinking</td>
+            </tr>
+
+            <tr class="tier"><td colspan="6">Society &amp; culture</td></tr>
+            <tr>
+              <td class="discipline">Sociology</td>
+              <td class="scope">Society (structure)</td>
+              <td>Empirical + theoretical</td>
+              <td>Reshape the structures that reproduce inequality</td>
+              <td class="goal">Fair inheritance across generations</td>
+              <td class="terms">Social reproduction; cultural capital; collective memory; inherited inequality</td>
+            </tr>
+            <tr>
+              <td class="discipline">Demography / Population Studies</td>
+              <td class="scope">Society (population)</td>
+              <td>Empirical + simulation</td>
+              <td>Project who the future population is</td>
+              <td class="goal">Know who we are deciding for</td>
+              <td class="terms">Cohort; age structure; fertility &amp; mortality; population projection</td>
+            </tr>
+            <tr>
+              <td class="discipline">Arts</td>
+              <td class="scope">Society &amp; culture</td>
+              <td>Creative / expressive</td>
+              <td>Shift public imagination and emotion</td>
+              <td class="goal">Make the future feel worth protecting</td>
+              <td class="terms">Cultural imagination; narrative; affective futures; symbolic transmission</td>
+            </tr>
+            <tr>
+              <td class="discipline">Theology</td>
+              <td class="scope">Community &amp; person</td>
+              <td>Theoretical / textual</td>
+              <td>Frame duty as sacred; endowment models</td>
+              <td class="goal">Durable moral commitment across generations</td>
+              <td class="terms">Covenant; stewardship; creation care; Sabbath / Jubilee; waqf</td>
+            </tr>
+            <tr>
+              <td class="discipline">Indigenous Studies</td>
+              <td class="scope">Community &amp; institutions</td>
+              <td>Practice / oral tradition</td>
+              <td>Adopt proven long-horizon governance</td>
+              <td class="goal">Institutionalize seventh-generation thinking</td>
+              <td class="terms">Seventh-generation principle; relational ontology; reciprocity; land as kin; TEK</td>
+            </tr>
+            <tr>
+              <td class="discipline">History</td>
+              <td class="scope">Society &amp; institutions (past)</td>
+              <td>Archival</td>
+              <td>Precedent: what aged well or backfired</td>
+              <td class="goal">Learn what actually endures</td>
+              <td class="terms">Precedent; longue durée; institutional durability; history of the future</td>
+            </tr>
+            <tr>
+              <td class="discipline">Archaeology</td>
+              <td class="scope">Society &amp; material (deep past)</td>
+              <td>Archival / material</td>
+              <td>Cautionary evidence from very long outcomes</td>
+              <td class="goal">Avoid repeating civilizational mistakes</td>
+              <td class="terms">Collapse; overshoot; material legacy; deep time; resilience</td>
+            </tr>
+
+            <tr class="tier"><td colspan="6">Institutions &amp; markets</td></tr>
+            <tr>
+              <td class="discipline">Political Science</td>
+              <td class="scope">Institutions</td>
+              <td>Theoretical + empirical</td>
+              <td>Design institutions that represent the unborn</td>
+              <td class="goal">Legitimate representation of future generations</td>
+              <td class="terms">Representation; presentism; future-generations commissioners; constitutional entrenchment</td>
+            </tr>
+            <tr>
+              <td class="discipline">Legal Studies</td>
+              <td class="scope">Institutions</td>
+              <td>Doctrinal + archival</td>
+              <td>Enact enforceable duties, rights, trusts</td>
+              <td class="goal">Make protection of the future binding</td>
+              <td class="terms">Public trust doctrine; standing; intergenerational equity; rights of future generations</td>
+            </tr>
+            <tr>
+              <td class="discipline">Economics</td>
+              <td class="scope">Institutions (markets)</td>
+              <td>Theoretical + simulation</td>
+              <td>Reprice the future (discounting, natural capital)</td>
+              <td class="goal">Efficient, fair present–future tradeoffs</td>
+              <td class="terms">Social discount rate; externalities; public goods; natural capital; commons; game theory</td>
+            </tr>
+            <tr>
+              <td class="discipline">Organizational Behavior &amp; Business</td>
+              <td class="scope">Institutions (organizations)</td>
+              <td>Empirical + theoretical</td>
+              <td>Redesign incentives against short-termism</td>
+              <td class="goal">Firms that create long-term value</td>
+              <td class="terms">Short-termism; fiduciary duty; long-term value; stewardship codes; ESG</td>
+            </tr>
+            <tr>
+              <td class="discipline">Foresight / Futures</td>
+              <td class="scope">Institutions &amp; society</td>
+              <td>Simulation / scenario</td>
+              <td>Run scenarios; anticipatory governance</td>
+              <td class="goal">Preparedness across multiple futures</td>
+              <td class="terms">Scenario planning; backcasting; horizon scanning; anticipatory governance</td>
+            </tr>
+            <tr>
+              <td class="discipline">Risk Analysis</td>
+              <td class="scope">Any scale (decisions)</td>
+              <td>Simulation + theoretical</td>
+              <td>Precaution and rules for irreversibility</td>
+              <td class="goal">Avoid permanent, catastrophic error</td>
+              <td class="terms">Precautionary principle; tail risk; existential risk; irreversibility; deep uncertainty</td>
+            </tr>
+
+            <tr class="tier"><td colspan="6">Artifacts &amp; the built world</td></tr>
+            <tr>
+              <td class="discipline">Engineering / Architecture / Design</td>
+              <td class="scope">Artifacts (material)</td>
+              <td>Empirical (applied)</td>
+              <td>Build durable, reversible artifacts</td>
+              <td class="goal">A safe, adaptable physical legacy</td>
+              <td class="terms">Design life; maintainability; design-for-disassembly; reversibility; engineering ethics</td>
+            </tr>
+            <tr>
+              <td class="discipline">Urban Studies</td>
+              <td class="scope">Artifacts &amp; society</td>
+              <td>Empirical + theoretical</td>
+              <td>Shape land use &amp; zoning to keep options open</td>
+              <td class="goal">Adaptable, equitable settlements</td>
+              <td class="terms">Zoning; land-use lock-in; sprawl; path dependence; adaptive reuse</td>
+            </tr>
+
+            <tr class="tier"><td colspan="6">Biosphere &amp; systems</td></tr>
+            <tr>
+              <td class="discipline">Sustainability</td>
+              <td class="scope">Biosphere &amp; systems</td>
+              <td>Simulation + empirical</td>
+              <td>Keep activity within planetary limits</td>
+              <td class="goal">Stay inside Earth's safe operating space</td>
+              <td class="terms">Planetary boundaries; carrying capacity; resilience; Brundtland; coupled human–natural systems</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="caption">Sorted along the scale ladder, body → biosphere. Philosophy sits above the ladder as the normative frame; Risk Analysis and Foresight are cross-scale methods filed at their institutional home. Overlap between rows is expected — it is the sign of a genuinely integrative field, not a filing error.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="numeral">IV</span>
+        <h2>What this project offers</h2>
+      </div>
+      <div class="prose">
+        <p>A field is not only an argument; it is an engine. Once these disciplines share a name, a question, and a table, the project can generate what none of them produces alone — new knowledge, new methods, new funding, new people, and new tools for the decisions themselves. This is what it offers.</p>
+      </div>
+    </div>
+
+    <div class="wrap-wide" style="margin-top: 1.9rem">
+      <ul class="offers">
+        <li class="offer">
+          <p class="offer-kick">Research agenda</p>
+          <h3 class="offer-h">A defining frontier of open problems</h3>
+          <p class="offer-d">A field is defined by its hard questions. This one opens an agenda no discipline currently owns — the non-identity problem, whose values should govern, the limits of representing the unborn, and how to value a distant future — giving researchers first-order questions with room to make their name.</p>
+        </li>
+        <li class="offer">
+          <p class="offer-kick">Methods</p>
+          <h3 class="offer-h">A shared, multi-epistemic toolkit</h3>
+          <p class="offer-d">A common method set — Future Design deliberation, intergenerational games, robust decision-making, comparative institutional analysis — that lets otherwise incompatible disciplines produce comparable, cumulative work instead of talking past one another.</p>
+        </li>
+        <li class="offer">
+          <p class="offer-kick">Demonstrators</p>
+          <h3 class="offer-h">Flagship studies only this field could produce</h3>
+          <p class="offer-d">Two or three concrete projects that prove the integration does real work — for instance, a full intergenerational reading of a water-conservation or aquifer decision through ethics, economics, hydrology, and law at once — turning the claim into evidence.</p>
+        </li>
+        <li class="offer">
+          <p class="offer-kick">Infrastructure</p>
+          <h3 class="offer-h">The apparatus to endure</h3>
+          <p class="offer-d">The scaffolding a field needs to persist: a journal or special issue, a working-paper series, a recurring convening, and a shared library of concepts and cases that later scholars can build on.</p>
+        </li>
+        <li class="offer">
+          <p class="offer-kick">Funding</p>
+          <h3 class="offer-h">New funding pathways</h3>
+          <p class="offer-d">Because the problem falls between existing review panels, it also falls between existing grants. A named field creates a fundable home and aligns squarely with major funder priorities — climate and resilience, sustainability, long-horizon and future-generations philanthropy, technological risk — and with the cross-directorate programs built for exactly this convergence.</p>
+        </li>
+        <li class="offer">
+          <p class="offer-kick">Collaboration</p>
+          <h3 class="offer-h">A cross-disciplinary network</h3>
+          <p class="offer-d">A standing consortium linking scholars across all twenty-one disciplines, and across institutions, who are working the same problem without knowing it — turning parallel effort into a shared, cumulative enterprise.</p>
+        </li>
+        <li class="offer">
+          <p class="offer-kick">Training</p>
+          <h3 class="offer-h">An interdisciplinary talent pipeline</h3>
+          <p class="offer-d">A path for people trained to think across these fields: a graduate certificate, doctoral and postdoctoral fellowships, and a summer school — producing both scholars and practitioners, from foresight analysts to future-generations officers.</p>
+        </li>
+        <li class="offer">
+          <p class="offer-kick">Impact</p>
+          <h3 class="offer-h">Translational tools for decision-makers</h3>
+          <p class="offer-d">Beyond scholarship, usable instruments — future-generations impact assessments, intergenerational accounting frameworks, decision protocols — for the governments, firms, communities, and Indigenous nations already facing these choices.</p>
+        </li>
+        <li class="offer">
+          <p class="offer-kick">Public engagement</p>
+          <h3 class="offer-h">A way to make the future felt</h3>
+          <p class="offer-d">Drawing on the arts and deliberative methods, the field can shift public imagination and build futures-literacy — helping citizens, students, and communities reason across generations rather than leaving the long view to specialists.</p>
+        </li>
+        <li class="offer">
+          <p class="offer-kick">Institutional fit</p>
+          <h3 class="offer-h">A mission a university can own</h3>
+          <p class="offer-d">For a host institution, the field advances existing commitments to global futures, sustainability, and use-inspired research, and gives them a distinctive, ownable identity — a reason to house it, not merely permit it.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="doc-foot">
+    <div class="wrap">
+      Posterity Studies · Founding prospectus · For discussion and circulation.
+    </div>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var mount = document.getElementById('wheel-mount');
+  if (!mount) return;
+  var NS = "http://www.w3.org/2000/svg";
+  function svgel(tag, attrs) { var e = document.createElementNS(NS, tag); if (attrs) for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+
+  var tierNames = { 1: "Normative frame", 2: "Body & biology", 3: "Person", 4: "Society & culture", 5: "Institutions & markets", 6: "Artifacts & built world", 7: "Biosphere & systems" };
+  var tierVar = { 1: "--t1", 2: "--t2", 3: "--t3", 4: "--t4", 5: "--t5", 6: "--t6", 7: "--t7" };
+  var field = { name: "Posterity Studies", x: `The study of how to make good decisions on behalf of those who come after us: all future people, not yet born, who cannot vote, consent, bargain, or hold us to account, yet who will inherit the consequences of what we choose today. Its horizon is posterity as a whole, not only our own descendants, and it asks the practical question the older fields leave homeless: given all we know, how do we actually decide, and how do we build the institutions, incentives, and cultures that decide well across generations?` };
+  var tiers = { 1: { name: "Normative frame", v: "--t1" }, 2: { name: "Body & biology", v: "--t2" }, 3: { name: "Person", v: "--t3" }, 4: { name: "Society & culture", v: "--t4" }, 5: { name: "Institutions & markets", v: "--t5" }, 6: { name: "Artifacts & built world", v: "--t6" }, 7: { name: "Biosphere & systems", v: "--t7" } };
+
+  var data = [
+    { n: "Philosophy", s: "Philosophy", t: 1, x: `Provides the justification without which the field is mere prudence: what we owe future people and why. Its signature puzzles — Parfit's non-identity problem, population ethics, Rawls's just-savings, the ethics of discounting, and whose values should govern (ours or theirs?). Introduces arguments for impact/efficiency in caring for the future (longtermism).` },
+    { n: "Evolutionary Biology / Behavioral Ecology", s: "Evo. Biology", t: 2, x: `Explains the default setting: kin selection, parental investment, and life-history theory account for why concern for near descendants is strong and instinctive, while concern for distant strangers decays sharply. It tells the field what human nature it's working with — and against.` },
+    { n: "Public Health / Epidemiology", s: "Public Health", t: 2, x: `The science of health effects that cross generations: long-latency exposures, developmental origins of disease and epigenetic inheritance — a literal biological mechanism by which one generation's conditions imprint on the next. It provides hard evidence that the present writes itself into descendants' bodies, plus population-level tools for acting on long horizons.` },
+    { n: "Psychology", s: "Psychology", t: 3, x: `Explains why individuals discount, ignore, or care about the future. Provides key mechanisms to understand barriers to acting for posterity: present bias, temporal discounting, psychological distance, as well as the mechanisms through which we can better make decisions for our own and others' futures. Focus is on the individual. This is the field's account of the levers of individual (in)action. Relevant constructs/terms: Impartial Intergenerational Beneficence; Intergenerational Concern; Future-Self Continuity; Consideration of Future Consequences; Psychological Distance; (Temporal) Discounting; Legacy; (Social) Generativity; Responsibility/Duty/Obligation to Future Generations.` },
+    { n: "Education", s: "Education", t: 3, x: `The primary institution by which one generation deliberately shapes the next — what knowledge, values, and capacities get passed on. It's the field's main lever: if acting for posterity requires citizens who can think long-term, education is how that capacity is actually built.` },
+    { n: "Sociology", s: "Sociology", t: 4, x: `Shows how societies reproduce themselves across generations: the transmission of norms, advantage, and inequality (Bourdieu's social reproduction) and collective memory (Halbwachs). Its distinctive contribution is who inherits what, including who inherits the harms, at the level of structure rather than individual choice.` },
+    { n: "Demography / Population Studies", s: "Demography", t: 4, x: `The quantitative anatomy of "future generations": who they'll be, how many, their age structure, fertility, and migration. It supplies the projections every future-facing decision rests on; links directly to population ethics, since present choices determine the size and identity of the future population itself.` },
+    { n: "Arts", s: "Arts", t: 4, x: `Makes the absent future emotionally present. Statistical futures don't move people; stories, images, and music do. The arts are the affective technology for extending moral concern across time, and, incidentally, among the most durable transmission media we have (cave paintings outlived their makers by 40,000 years).` },
+    { n: "Theology", s: "Theology", t: 4, x: `Home to humanity's most successful multi-millennial institutions for transmitting obligation: covenant, creation held in stewardship, Sabbath/Jubilee land rest, and waqf endowments. It offers deep traditions of framing long-term duty as sacred rather than optional — and working models of value-transmission that have lasted thousands of years.` },
+    { n: "Indigenous Studies", s: "Indigenous", t: 4, x: `Offers living, tested traditions of long-horizon governance: the Haudenosaunee seventh-generation principle, relational ontologies that treat land and water as kin with standing, and reciprocity as an organizing ethic. It's proof-of-concept that multi-generational thinking can be institutionalized and sustained, not just theorized — and a corrective to the field's likely Western default.` },
+    { n: "History", s: "History", t: 4, x: `Studies how intentions toward posterity met reality at human-institutional timescales: which reforms aged well or backfired, which institutions endured, and how each era imagined its descendants. It gives causal case studies over decades to centuries, and a history of the future itself as a concept.` },
+    { n: "Archaeology", s: "Archaeology", t: 4, x: `Reads the material residue of long-term choices — soil exhaustion, deforestation, water mismanagement — across centuries and millennia. It offers the longest empirical baseline we have for how resources and institutional decisions play out, and a humbling record of societies that misjudged their own durability.` },
+    { n: "Political Science", s: "Political Sci.", t: 5, x: `Confronts the core representation problem: future generations don't vote, and electoral cycles reward presentism. It supplies theories of legitimacy, collective action, and institutional design (future-generations commissioners, constitutional entrenchment; institutions for future generations). In other words, how power can be made to answer to people who can't hold it accountable.` },
+    { n: "Legal Studies", s: "Legal Studies", t: 5, x: `Provides the instruments that actually bind the present to the future: constitutions, trusts, the public trust doctrine, standing (can future people sue? — recent youth climate cases), and statutory duties to future generations. It's how a duty to the future becomes enforceable rather than sentimental. Offers tools that set norms for future governance, and punishment for harming the future.` },
+    { n: "Economics", s: "Economics", t: 5, x: `Supplies the machinery for weighing future against present: social discount rates (Stern vs. Nordhaus), long-horizon cost-benefit analysis, natural-capital accounting, and the theory of why markets systematically underweight the future (public goods, externalities). It gives the quantified tradeoff and the language policymakers actually use. Introduces key paradigms (e.g., commons issues, trust games, game theory) to study these.` },
+    { n: "Organizational Behavior & Business", s: "Org. & Business", t: 5, x: `Firms make many of the highest-stakes long-horizon decisions (capital investment, R&D, extraction) under the fiercest short-term pressure (quarterly earnings, short leadership tenure). This discipline studies short-termism and its remedies: incentive design, long-term ownership models, and stewardship codes that align organizations with multi-decade consequences.` },
+    { n: "Foresight / Futures", s: "Foresight", t: 5, x: `The disciplined practice of reasoning about futures that don't yet exist: scenario planning, horizon scanning, backcasting, anticipatory governance. Its distinctive value is method — making the future a structured object of analysis, and holding multiple futures open rather than betting on one forecast.` },
+    { n: "Risk Analysis", s: "Risk Analysis", t: 5, x: `Handles uncertainty, irreversibility, and low-probability/high-consequence events: the precautionary principle, tail and catastrophic risk, and decision rules under deep uncertainty. It's the toolkit for deciding responsibly when stakes are large, outcomes unknown, and errors permanent.` },
+    { n: "Engineering / Architecture / Design", s: "Eng. & Design", t: 6, x: `Operates at the level of the individual artifact: the bridge, building, or water system future people will inherit. Its distinctive craft is technical durability and gracefulness over time — design lifespans, materials, maintainability, design-for-disassembly, reversibility, and the engineering-ethics codes that already bind designers to the safety of users not yet born. The question it owns: is this thing built to last, adapt, and be safely retired?` },
+    { n: "Urban Studies", s: "Urban Studies", t: 6, x: `Operates at the level of the settlement as a system — the configuration of many artifacts, people, markets, and policies. Its distinctive contribution is the study of how zoning, land use, density, and housing dynamics lock in patterns (sprawl, car dependence, segregation) that outlive any single building, and how those patterns transmit neighborhood advantage or harm across generations.` },
+    { n: "Sustainability", s: "Sustainability", t: 7, x: `The integrative science of the biophysical envelope: planetary boundaries, resilience, carrying capacity, and coupled human-natural systems. It supplies the systems-level account of the physical limits that decisions for posterity operate within — a ready-made framework the new field extends beyond the environmental into the institutional, cultural, and technological.` }
+  ];
+
+  var cx = 500, cy = 500, rOut = 208, rIn = 140, labelR = 220, VB = 1000;
+
+  function polar(r, a) { var t = a * Math.PI / 180; return { x: cx + r * Math.sin(t), y: cy - r * Math.cos(t) }; }
+  function arcPath(a0, a1) {
+    var oS = polar(rOut, a0), oE = polar(rOut, a1), iE = polar(rIn, a1), iS = polar(rIn, a0);
+    var laf = (a1 - a0) > 180 ? 1 : 0;
+    return ['M', oS.x, oS.y, 'A', rOut, rOut, 0, laf, 1, oE.x, oE.y, 'L', iE.x, iE.y, 'A', rIn, rIn, 0, laf, 0, iS.x, iS.y, 'Z'].join(' ');
+  }
+  function labelLines(n) {
+    var i = n.indexOf(' / ');
+    if (i > -1) return [n.slice(0, i), n.slice(i + 3)];
+    var j = n.indexOf(' & ');
+    if (j > -1) return [n.slice(0, j), '& ' + n.slice(j + 3)];
+    return [n];
+  }
+
+  var svg = svgel('svg', { viewBox: '0 0 ' + VB + ' ' + VB, class: 'wheel-svg', role: 'group', 'aria-label': 'Radial map of 21 contributing disciplines, arranged by scale from the body to the biosphere.' });
+  var N = data.length, step = 360 / N, gap = 1.1, segEls = [], cats = [];
+  var card = document.getElementById('detail-card');
+
+  function renderCard(tierLabel, colorVar, name, text) {
+    while (card.firstChild) card.removeChild(card.firstChild);
+    card.classList.remove('is-empty');
+    var inner = document.createElement('div'); inner.className = 'detail-inner';
+    var pt = document.createElement('p'); pt.className = 'detail-tier';
+    var sw = document.createElement('span'); sw.className = 'swatch'; sw.style.background = colorVar ? 'var(' + colorVar + ')' : 'var(--ink-mute)';
+    pt.appendChild(sw); pt.appendChild(document.createTextNode(' ' + tierLabel));
+    var h = document.createElement('h3'); h.className = 'detail-name'; h.textContent = name;
+    var p = document.createElement('p'); p.className = 'detail-text'; p.textContent = text;
+    inner.appendChild(pt); inner.appendChild(h); inner.appendChild(p);
+    card.appendChild(inner);
+  }
+  function showDiscipline(i) {
+    var d = data[i];
+    segEls.forEach(function (g, j) { g.classList.toggle('active', j === i); });
+    renderCard(tierNames[d.t], tierVar[d.t], d.n, d.x);
+  }
+  function showField() {
+    segEls.forEach(function (g) { g.classList.remove('active'); });
+    renderCard('The field', null, field.name, field.x);
+  }
+  function highlightTier(k) {
+    segEls.forEach(function (g) { g.classList.toggle('dim', +g.getAttribute('data-tier') !== k); });
+    cats.forEach(function (c) { c.classList.toggle('active', +c.getAttribute('data-tier') === k); });
+  }
+  function clearTier() {
+    segEls.forEach(function (g) { g.classList.remove('dim'); });
+    cats.forEach(function (c) { c.classList.remove('active'); });
+  }
+
+  data.forEach(function (d, i) {
+    var a0 = i * step + gap / 2, a1 = (i + 1) * step - gap / 2, mid = i * step + step / 2;
+    var g = svgel('g', { class: 'seg', tabindex: '0', role: 'button', 'data-tier': d.t, 'aria-label': d.n + '. ' + tierNames[d.t] + '. ' + d.x });
+    var path = svgel('path', { class: 'seg-path', d: arcPath(a0, a1) });
+    path.style.fill = 'var(' + tierVar[d.t] + ')';
+    g.appendChild(path);
+    var lp = polar(labelR, mid), rot = mid <= 180 ? mid - 90 : mid - 270, anchor = mid <= 180 ? 'start' : 'end';
+    var tx = svgel('text', { class: 'seg-label', 'text-anchor': anchor, 'dominant-baseline': 'central', x: lp.x.toFixed(1), y: lp.y.toFixed(1), transform: 'rotate(' + rot.toFixed(2) + ' ' + lp.x.toFixed(2) + ' ' + lp.y.toFixed(2) + ')' });
+    var lines = labelLines(d.n);
+    if (lines.length === 1) { tx.textContent = lines[0]; }
+    else {
+      var s1 = svgel('tspan', { x: lp.x.toFixed(1), dy: '-0.55em' }); s1.textContent = lines[0];
+      var s2 = svgel('tspan', { x: lp.x.toFixed(1), dy: '1.1em' }); s2.textContent = lines[1];
+      tx.appendChild(s1); tx.appendChild(s2);
+    }
+    g.appendChild(tx);
+    g.addEventListener('mouseenter', function () { showDiscipline(i); });
+    g.addEventListener('focus', function () { showDiscipline(i); });
+    g.addEventListener('click', function () { showDiscipline(i); g.focus(); });
+    g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showDiscipline(i); } });
+    svg.appendChild(g); segEls.push(g);
+  });
+
+  var hub = svgel('g', { class: 'hub', tabindex: '0', role: 'button', 'aria-label': field.name + '. ' + field.x });
+  hub.appendChild(svgel('circle', { class: 'hub-ring', cx: cx, cy: cy, r: rIn - 14 }));
+  function hubText(x, y, str, cls, size) { var t = svgel('text', { class: cls, x: x, y: y, 'text-anchor': 'middle', 'dominant-baseline': 'central', 'font-size': size }); t.textContent = str; hub.appendChild(t); }
+  hubText(cx, cy - 20, 'Posterity', 'hub-title', 27);
+  hubText(cx, cy + 12, 'Studies', 'hub-title', 27);
+  hubText(cx, cy + 46, 'hover for definition', 'hub-sub', 15);
+  hub.addEventListener('mouseenter', showField);
+  hub.addEventListener('focus', showField);
+  hub.addEventListener('click', function () { showField(); hub.focus(); });
+  hub.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showField(); } });
+  svg.appendChild(hub);
+
+  mount.appendChild(svg);
+
+  var catWrap = document.getElementById('cat-list');
+  [1, 2, 3, 4, 5, 6, 7].forEach(function (k) {
+    var row = document.createElement('div');
+    row.className = 'cat'; row.setAttribute('tabindex', '0'); row.setAttribute('role', 'button');
+    row.setAttribute('data-tier', k); row.setAttribute('aria-label', 'Highlight ' + tierNames[k] + ' disciplines');
+    var dot = document.createElement('span'); dot.className = 'dotc'; dot.style.background = 'var(' + tierVar[k] + ')';
+    var nm = document.createElement('span'); nm.className = 'catname'; nm.textContent = tierNames[k];
+    row.appendChild(dot); row.appendChild(nm);
+    row.addEventListener('mouseenter', function () { highlightTier(k); });
+    row.addEventListener('mouseleave', clearTier);
+    row.addEventListener('focus', function () { highlightTier(k); });
+    row.addEventListener('blur', clearTier);
+    catWrap.appendChild(row); cats.push(row);
+  });
+})();
+</script>
+</body>
+</html>
