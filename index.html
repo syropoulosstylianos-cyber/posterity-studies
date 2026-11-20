@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Posterity Studies</title>
+<title>What is Posterity Studies</title>
 <meta name="description" content="A proposal for a new, interdisciplinary field of study that centers posterity, all future generations of humans and other species, as its animating object." />
 
 <style>
@@ -347,8 +347,17 @@
     @keyframes fadeSwap { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   }
 </style>
+<style>
+  .sitenav { background: var(--surface); border-bottom: 1px solid var(--hair); font-family: var(--font-ui); font-size: .85rem; }
+  .sitenav-in { max-width: 1180px; margin: 0 auto; padding: .6rem max(16px, env(safe-area-inset-right, 0px)) .6rem max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-wrap: wrap; gap: .3rem 1.4rem; align-items: center; }
+  .sitenav a { color: var(--ink-soft); text-decoration: none; padding: .2rem 0; border-bottom: 2px solid transparent; }
+  .sitenav a:hover { color: var(--ink); }
+  .sitenav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--accent); }
+  .sitenav-brand { font-weight: 600; color: var(--ink) !important; letter-spacing: .02em; margin-right: .6rem; }
+</style>
 </head>
 <body>
+<nav class="sitenav" aria-label="Site"><div class="sitenav-in"><a class="sitenav-brand" href="index.html">Posterity Studies</a><a href="index.html" aria-current="page">What is Posterity Studies</a><a href="research-centers.html">Relevant Research Centers and What Posterity Studies Adds</a></div></nav>
 <header class="masthead">
   <svg class="rings" viewBox="0 0 200 200" fill="none" aria-hidden="true">
     <circle cx="100" cy="100" r="26" stroke="currentColor" stroke-width="1"/>
